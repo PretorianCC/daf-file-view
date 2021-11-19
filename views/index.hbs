@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>DAV file viewer (.div)</title>
+  <style>
+
+    .content-table {
+      border-collapse: collapse;
+      /* граница вокруг ячеек одинарной толщины */
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 400px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+    }
+
+    .content-table thead tr {
+      background-color: #009879;
+      color: white;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .content-table th,
+    .content-table td {
+      padding: 12px 15px;
+    }
+
+    .content-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
+    .content-table tbody tr.active-row {
+      font-weight: bold;
+      color: #009879;
+    }
+
+   #custom-button, .btn {
+      padding: 10px; /* отступ полей внутри элемента */
+      color: white; /* цвет шрифта */
+      background-color: #009578; /* цвет фона */
+      border: 1px solid #000; /* стиль бордюра */
+      border-radius: 5px; /* радиус скругления бордюра */
+      cursor: pointer; /* указатель курсора */
+    }
+    #custom-button:hover, .btn:hover {
+      background-color: #00b28f; /* цвет фона при наведении */
+    }
+    #custom-text {
+      margin-left: 10px; /* отступ слева до элемента */
+      font-family: sans-serif; /* шрифт без засечек */
+      color: #aaa; /* цвет шрифта */
+    }
+
+  </style>
+</head>
+
+<body>
+  <form enctype="multipart/form-data" method="post">
+    <div class="grid-container">
+      <label for="file">dav file (.div):</label>
+      <input type="file" id="real-file" name="file" hidden>
+      <button type="button" id="custom-button">Выберете файл</button>
+      <span id="custom-text">Не выбран файл</span>
+      <input class="btn" type="submit" value="Посмотреть">
+    </div>
+  </form>
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Версия файла</th>
+        <th>Идентификатор местоположения MDI</th>
+        <th>Номер детали</th>
+        <th>Замена номера детали</th>
+        <th>Количество в наличии</th>
+        <th>Количество по заказу</th>
+        <th>Количество работ</th>
+        <th>Количество, присвоенное клиентами</th>
+        <th>Чистая потребность на текущей неделе</th>
+        <th>Потерянные продажи на текущей неделе</th>
+        <th>Вес в нетто текущей недели</th>
+        <th>Положительные строки текущей недели</th>
+        <th>Прямые положительные линии текущей недели доступны</th>
+        <th>Заказ на текущую неделю для поставщика</th>
+        <th>Заказ запаса на текущей неделе для поставщика</th>
+        <th>Чистый спрос за последние 52 недели</th>
+        <th>Количество потерянных продаж за последние 52 недели</th>
+        <th>Вес в нетто последние 52 недели</th>
+        <th>Закупочная цена в евро</th>
+        <th>Закупочная цена во внутренней валюте</th>
+        <th>Единица измерения поставщика</th>
+        <th>Единица упаковки поставщика</th>
+        <th>Код поставщика</th>
+        <th>Минимальный уровень запаса</th>
+        <th>Максимальный уровень запаса</th>
+        <th>Единица измерения дилера</th>
+        <th>Коэффициент единицы измерения</th>
+        <th>Срок поставки Поставщика (дней)</th>
+        <th>Местоположение ячейки</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td>{{fileVersion}}</td>
+        <td>{{mdiLocationIdentifier}}</td>
+        <td>{{partNumber}}</td>
+        <td>{{supersedingPartNumber}}</td>
+        <td>{{onHandQuantity}}</td>
+        <td>{{onOrderQuantity}}</td>
+        <td>{{jobQuantity}}</td>
+        <td>{{quantityAllocatedToCustomers}}</td>
+        <td>{{currentWeekNetDemand}}</td>
+        <td>{{currentWeekLostSales}}</td>
+        <td>{{currentWeekNetLines}}</td>
+        <td>{{currentWeekPositiveLines}}</td>
+        <td>{{currentWeekPositiveLinesDirectAvailable}}</td>
+        <td>{{currentWeekRushOrderLinesToSupplier}}</td>
+        <td>{{currentWeekStockOrderLinesToSupplier}}</td>
+        <td>{{totalNetDemandPast52Weeks}}</td>
+        <td>{{totalLostSalesPast52Weeks}}</td>
+        <td>{{totalNetLinesPast52Weeks}}</td>
+        <td>{{purchasingPriceInEuro}}</td>
+        <td>{{purchasingPriceInLocalCurrency}}</td>
+        <td>{{unitOfMeasureOfSupplier}}</td>
+        <td>{{packagingUnitOfSupplier}}</td>
+        <td>{{vendorSupplierCode}}</td>
+        <td>{{minimumStockLevel}}</td>
+        <td>{{maximumStockLevel}}</td>
+        <td>{{unitOfMeasureOfDealer}}</td>
+        <td>{{unitOfMeasureFactor}}</td>
+        <td>{{deliveryTimeOfSupplier}}</td>
+        <td>{{binLocation}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <script>
+    const realFileBtn = document.getElementById('real-file')
+    const customBtn = document.getElementById('custom-button')
+    const customTxt = document.getElementById('custom-text')
+
+    customBtn.addEventListener("click", () => {
+      realFileBtn.click()
+    })
+    realFileBtn.addEventListener("change", () => {
+      customTxt.innerHTML = realFileBtn.value ? realFileBtn.value.match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1] : "Выберете файл."
+    })
+  </script>
+</body>
+
+</html>

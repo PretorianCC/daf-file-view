@@ -1,0 +1,31 @@
+export interface Field {
+    fileVersion: string;
+    mdiLocationIdentifier: string;
+    partNumber: string;
+    supersedingPartNumber: string;
+    onHandQuantity: number;
+    onOrderQuantity: number;
+    jobQuantity: number;
+    quantityAllocatedToCustomers: number;
+    currentWeekNetDemand: number;
+    currentWeekLostSales: number;
+    currentWeekNetLines: number;
+    currentWeekPositiveLines: number;
+    currentWeekPositiveLinesDirectAvailable: number;
+    currentWeekRushOrderLinesToSupplier: number;
+    currentWeekStockOrderLinesToSupplier: number;
+    totalNetDemandPast52Weeks: number;
+    totalLostSalesPast52Weeks: number;
+    totalNetLinesPast52Weeks: number;
+    purchasingPriceInEuro: number;
+    purchasingPriceInLocalCurrency: number;
+    unitOfMeasureOfSupplier: string;
+    packagingUnitOfSupplier: number;
+    vendorSupplierCode: string;
+    minimumStockLevel: number;
+    maximumStockLevel: number;
+    unitOfMeasureOfDealer: string;
+    unitOfMeasureFactor: number;
+    deliveryTimeOfSupplier: number;
+    binLocation: string;
+}
