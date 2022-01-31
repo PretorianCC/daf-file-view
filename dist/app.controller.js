@@ -28,14 +28,14 @@ let AppController = class AppController {
     }
 };
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)('daffileview'),
     (0, common_1.Render)('index'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "rootGet", null);
 __decorate([
-    (0, common_1.Post)(),
+    (0, common_1.Post)('daffileview'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     (0, common_1.Render)('index'),
     __param(0, (0, common_1.UploadedFile)()),

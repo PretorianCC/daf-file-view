@@ -6,13 +6,13 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('daffileview')
   @Render('index')
   rootGet() {
     return {data: ""};
   }
 
-  @Post()
+  @Post('daffileview')
   @UseInterceptors(FileInterceptor('file'))
   @Render('index')
   uploadFile(@UploadedFile() file: Express.Multer.File) {
